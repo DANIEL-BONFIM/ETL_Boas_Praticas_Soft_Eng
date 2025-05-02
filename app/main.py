@@ -1,6 +1,10 @@
-from pipeline import extract as ex
+from pipeline.extract import extract_from_excel
+from pipeline.transform import concat_files
+from pipeline.load import load_data
 
-files_lists = ex.extract_from_excel(input_path = 'data/Input')
+if __name__ == '__main__':
+  df_list = extract_from_excel('data/input')
+  df = concat_files(df_list)
+  load_data(df, 'data/output', 'output')
 
-print(files_lists)
 
