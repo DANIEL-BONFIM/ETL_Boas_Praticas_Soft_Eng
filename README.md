@@ -81,6 +81,18 @@ Isso evita versionar arquivos temporários, tokens, senhas e o ambiente virtual.
 
 ---
 
+### Modularização:
+
+Modularizar traz mais seriedade, organização e torna seu projeto reutilizavel, embora seja mais trabalhoso rsrsrs. Permite escalabilidade e facilita os testes.
+
+Para criar módulos, crie uma pasta onde será gerado seus códigos para o projeto. No meu caso, um projeto de ETL, criei as pastas:
+
+app = > onde ficará os programas do ETL e os testes
+ |--- pipeline = > irá contar o extrator, transformador e o carregador do dados
+ |--- test => onde armazenará os arquivos .py para teste com o pytest. 
+
+para cada pasta é importante ter o __init__.py, que permite que as pastas pipeline e testes sejam reconhecidas como pacote, em versões mais atuais ele não é necessário, todavia continua sendo uma boa prática.
+
 ## CONCLUSÃO
 
 Com este setup, seu projeto terá:  
