@@ -1,91 +1,101 @@
+# SETUP PARA UM BOM PROJETO EM PYTHON E MODULARIZAÇÃO
 
-SETUP PARA UM BOM PROJETO EM PYTHON E MODULARIZAÇÃO
+Para início de tudo, é preciso ter uma versão do Python atualizada, evitando que a segurança seja comprometida, pois a não atualização pode gerar riscos nesse sentido.
 
-Para inicio de tudo, é preciso ter uma versão do python atualizada, evitando que a segurança seja comprometida, pois a não atualização pode gerar riscos nesse sentido.
+Como primeiro passo, crie uma pasta onde será armazenado seu projeto. Neste guia usamos a pasta **AULAN** e o editor **VSCode**.
 
-Como primeiro passo, crie uma pasta onde será armazenada seu projeto, neste projeto foi a Pasta AULAN, e foi utilizado o VSCode para a criação do projeto
+---
 
----- SETUP INICIAL ----
+## SETUP INICIAL
 
-1º Passo - Arquivo - python-version
+### 1º Passo – Arquivo `.python-version`
+Neste arquivo, você deve inserir a versão do Python utilizada. Isso evita que a famosa frase *“na minha máquina roda”* se torne um problema.
 
- - Neste arquivo, você deve inserir a versão do python utilizada, isso também evita que a famosa frase "na minha máquina roda" seja uma realidade no seu projeto.
- 
- Comando:
+**Comando**  
+No terminal do VSCode, execute:  
+```bash
+pyenv local 3.12.1
+```
 
-  Para realizar essa tarefa, vá no terminal do seu VScode
-  - pyenv local x.xx.x, onde x é a versão, que neste meu caso foi 3.12.1
+---
 
+### 2º Passo – Instalar e configurar o Poetry
+O Poetry gerencia dependências e ambientes virtuais.
 
-2º Instalar seu gerenciador, no caso o poetry
+**Comandos**  
+```bash
+pip install poetry
+poetry config virtualenvs.in-project true
+poetry init
+```
 
-Dentro da sua pasta do projeto, utilize os comandos:
+Durante o `poetry init`, responda:  
+- **Package name:** AULAN  
+- **Version:** 0.1.0  
+- **Python version:** >=3.12  
+- Responda **yes** para definir dependências interativamente.
 
- - pip install => instala o poetry
- 
- - poetry config virtualenvs.in-project true => permite a criação de ambientes virtuais no seu projeto
- 
- - poetry init => iniciar o gerenciamento
+Isso gera o arquivo `pyproject.toml`, que armazena suas dependências e configurações.
 
- Após o init, será perguntado:
+---
 
-  - Package name ['nome_da_sua_pasta']:
-  - Version [0.1.0]:  
-  - Description []:  
-  - Author [DANIEL-BONFIM, n to skip]:   
-  - License []:  
-  - Compatible Python versions [>=3.12]:  
-  - Would you like to define your main dependencies interactively? (yes/no) [yes]
-  - Package to add or search for (leave blank to skip):
-  - Would you like to define your development dependencies interactively? (yes/no)
-  - Do you confirm generation? (yes/no) 
+### 3º Passo – Criar ambiente virtual
+No terminal, ative o shell do Poetry com:  
+```bash
+poetry shell
+```
+Isso cria a pasta oculta `.venv/` na raiz do projeto.
 
-  Você pode adicionar uma descrição, licença e etc, de modo geral, responda yes para todas as demais perguntas
+---
 
+### 4º Passo – Instalar pacotes
+Exemplo: instalar o Pandas  
+```bash
+poetry add pandas
+```
+O `pyproject.toml` e o `poetry.lock` são atualizados automaticamente.
 
-Será criado um arquivo pyproject.toml onde ele será alterado dinamicamente quando vocÊ adicionar uma biblioteca com a versão xxx, logo de cara você poderá ver a sua versão do python usada.
+---
 
-3º Poetry Shell para criar o venv
+## CONFIGURAÇÃO DO GIT
 
-Para criar seu ambiente virtual, basta, ainda no termninal do VSCODE, digitar o comando poetry sheel e uma pasta chamada ".venv" será criada, onde vocÊ irá instalar seus pacotes como pandas e etc.
+### 1º Passo – Iniciar repositório
+```bash
+git init
+```
 
-Agora seu projeto vai rodar independentemente da máquina que o rodar, mas não é o fim...
-
-4º Instalar pacotes com o venv
-
-Agora para instalar seus pacotes, utilize o comando poetry add, por exemplo:
-
-  poetry add pandas
-
-O pandas, neste exemplo, seria instalado no seu ambiente virtual, garantindo que quando baixar seu repositório será possível rodar o programa sem a necessidade de instalar novamente o pacote.
-
----- GIT ----
-
-Para um bom projeto, versionamento é fundamental, por isso, vamos trabalhar com GIT a partir de agora:
-
-1º Com o git instalado, rode o comando:
-
- - git init
-
- Será gerado uma pasta .git, porém ela pode estar oculta! para que sempre esteja aparente crie um arquivo:
-
-  config.json
-
- Cujo conteúdo será:
-
+Para visualizar a pasta `.git` no VSCode, crie ou edite o arquivo `.vscode/settings.json` com o conteúdo:  
+```json
 {
-  "files.exclude"{
-    "**/git":false
+  "files.exclude": {
+    "**/.git": false
   }
 }
+```
 
-2º gitignore
+---
 
-O gitignore permite voê ignorar arquivos desnecessários de se subir no repositorio como o ambiente virtual ou informações criticas como token e senhas.
+### 2º Passo – Criar `.gitignore`
+Use o gerador do [Toptal](https://www.toptal.com/developers/gitignore) para Python e cole o resultado em `.gitignore`.  
+Isso evita versionar arquivos temporários, tokens, senhas e o ambiente virtual.
 
-Para isso, basta criar este arquivo .gitignore e inserir o que não se quer versionar e subir no repositorio.
+---
 
-no site: https://www.toptal.com/developers/gitignore você pode pegar um padrão de ignores para o seu git, pesquisando por python, copiando e colando o resultado da pesquisa em seu gitignore.
+## CONCLUSÃO
 
+Com este setup, seu projeto terá:  
+- **Padronização:** Python fixo via `.python-version`.  
+- **Isolamento:** ambiente virtual no `.venv/`.  
+- **Versionamento:** Git configurado corretamente.  
+- **Reprodutibilidade:** dependências definidas em `pyproject.toml`/`poetry.lock`.
 
+---
 
+### ⚠️ Observações
+
+1. O comando `pyenv local` funciona apenas com o Pyenv instalado.  
+2. O ajuste em `settings.json` vale para VSCode.  
+3. Após o `git init`, adicione o remoto do GitHub:  
+   ```bash
+   git remote add origin <URL-do-repositório>
+   ```
