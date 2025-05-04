@@ -17,7 +17,7 @@ No terminal do VSCode, execute:
 pyenv local 3.12.1
 ```
 
----
+----
 
 ### 2º Passo – Instalar e configurar o Poetry
 O Poetry gerencia dependências e ambientes virtuais. Com isso, as versões das bibliotecas, por exemplo, serão registradas no arquivo gerado, sem a necessidade de você inseri-las manualmente.
