@@ -1,4 +1,4 @@
-# SETUP FOR A GOOD PYTHON PROJECT AND MODULARIZATION
+# SETUP FOR A GOOD PYTHON PROJECT AND MODULARIZATION ([🇧🇷 Leia em Português](README_PT.md))
 
 To begin with, you need to have an updated version of Python to avoid compromising security, as not updating can pose risks in this regard.
 
